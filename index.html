@@ -113,6 +113,15 @@
   color: var(--subtext);
   white-space: nowrap;        /* teks tidak turun */
 }
+    .interests .item::after {
+  content: "•";
+  margin-left: 12px;
+  opacity: 0.4;
+}
+
+.interests .item:last-child::after {
+  content: "";
+}
     }
 
     .text {
