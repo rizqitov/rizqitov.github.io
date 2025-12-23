@@ -40,18 +40,23 @@ body {
   overflow-x:hidden;
 }
 
-body::before {
+body::after {
   content: "⚙️ 💻 📱 🧠 ☁️ 🐧 🌐 </> {} API AI ML ⚡ "
            "⚙️ 💻 📱 🧠 ☁️ 🐧 🌐 </> {} API AI ML ⚡ "
            "⚙️ 💻 📱 🧠 ☁️ 🐧 🌐 </> {} API AI ML ⚡ ";
-  font-size: 24px;
-  letter-spacing: 20px;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  font-size: 20px;
   line-height: 2.4;
-  opacity: .35;
+  letter-spacing: 16px;
+  color: rgba(0,0,0,.04);
+  white-space: pre-wrap;
+  pointer-events: none
 }
 
-body.dark::before {
-  color:rgba(255,255,255,.05);
+body.dark::after {
+  color:rgba(255,255,255,.04);
 }
 
 
