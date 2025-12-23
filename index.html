@@ -1,228 +1,355 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Website</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Website</title>
 
-  <style>
-    :root {
-      --bg: #eeeeee;
-      --card: #ffffff;
-      --text: #212121;
-      --subtext: #424242;
-      --accent: #9e9e9e;
-    }
-
-    body.dark {
-      --bg: #121212;
-      --card: #1e1e1e;
-      --text: #f5f5f5;
-      --subtext: #bdbdbd;
-      --accent: #424242;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, Helvetica, sans-serif;
-    }
-
-    body {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: var(--bg);
-      color: var(--text);
-      transition: 0.3s;
-      padding: 16px; /* penting buat mobile */
-      position: relative;
-      overflow-x: hidden;
-    }
-
-    /* doodle background (FIX) */
-    body::before {
-      content: "</> {} [] () API AI ML ⚙️ ☁️ 💻 📱 🧠 🐧 🌐";
-      position: fixed;
-      inset: 0;
-      font-size: 26px;
-      letter-spacing: 14px;
-      color: rgba(0, 0, 0, 0.06);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      white-space: pre-wrap;
-      pointer-events: none;
-    }
-
-    body.dark::before {
-      color: rgba(255, 255, 255, 0.06);
-    }
-
-    .container {
-      width: 100%;
-      max-width: 380px;
-      background: var(--card);
-      border-radius: 18px;
-      padding: 24px 20px;
-      text-align: center;
-      box-shadow: 0 10px 30px rgba(0,0,0,.15);
-      position: relative;
-      z-index: 1;
-    }
-
-    .toggle {
-      position: absolute;
-      top: 14px;
-      right: 14px;
-      font-size: 13px;
-      background: var(--bg);
-      padding: 6px 10px;
-      border-radius: 20px;
-      cursor: pointer;
-    }
-
-    .profile-img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid var(--accent);
-      margin: 14px auto 18px;
-      display: block;
-    }
-
-    /* interests */
-    .interests {
-  display: flex;
-  flex-direction: row;        /* HORIZONTAL */
-  justify-content: center;    /* tengah */
-  gap: 14px;                  /* jarak antar teks */
-  margin-bottom: 18px;
-  flex-wrap: wrap;            /* aman di layar kecil */
+<style>
+:root {
+  --bg:#eeeeee;
+  --card:#ffffff;
+  --text:#212121;
+  --subtext:#424242;
+  --accent:#9e9e9e;
 }
 
-   .interests .item {
-  background: none;           /* hilangkan box */
-  padding: 0;
-  border-radius: 0;
-  font-size: 12px;
-  color: var(--subtext);
-  white-space: nowrap;        /* teks tidak turun */
-}
-    .interests .item::after {
-  content: "•";
-  margin-left: 12px;
-  opacity: 0.4;
+body.dark {
+  --bg:#121212;
+  --card:#1e1e1e;
+  --text:#f5f5f5;
+  --subtext:#bdbdbd;
+  --accent:#424242;
 }
 
-.interests .item:last-child::after {
-  content: "";
+* {
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, Helvetica, sans-serif;
 }
 
-    .text {
-  font-size: 15px;
-  line-height: 1.6;
-  margin-bottom: 22px; /* TAMBAH JARAK KE BAWAH */
-  color: var(--subtext);
-    }
+body {
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:var(--bg);
+  color:var(--text);
+  padding:16px;
+  overflow-x:hidden;
+}
 
-    .social-links a {
-      display: block;
-      padding: 12px;
-      margin-bottom: 10px;
-      border-radius: 12px;
-      background: var(--bg);
-      text-decoration: none;
-      color: var(--text);
-      font-size: 15px;
-      transition: 0.2s;
-    }
+body::before {
+  content:"</> {} [] () API AI ML ⚙️ ☁️ 💻 📱 🧠 🐧 🌐";
+  position: fixed;
+  z-index: 0;
+  inset:0;
+  font-size:26px;
+  letter-spacing:14px;
+  color:rgba(0,0,0,.06);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  pointer-events:none;
+}
 
-    .social-links a:hover {
-      background: var(--accent);
-    }
+body.dark::before {
+  color:rgba(255,255,255,.06);
+}
 
-    .contact {
-  margin: 18px 0 6px;
-  text-align: center;
+
+.container {
+  width:100%;
+  max-width:380px;
+  background:var(--card);
+  border-radius:18px;
+  padding:24px 20px;
+  text-align:center;
+  box-shadow:0 10px 30px rgba(0,0,0,.15);
+  position:relative;
+  z-index:1;
+}
+
+.toggle {
+  position:absolute;
+  top:14px;
+  right:14px;
+  font-size:13px;
+  background:var(--bg);
+  padding:6px 10px;
+  border-radius:20px;
+  cursor:pointer;
+}
+
+.spotify-btn {
+  position:absolute;
+  top:14px;
+  left:14px;
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  background:var(--bg);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+}
+
+.spotify-btn svg {
+  width:22px;
+  height:22px;
+  fill:#1DB954;
+}
+
+.profile-img {
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  object-fit:cover;
+  border:3px solid var(--accent);
+  margin:14px auto 18px;
+}
+
+.interests {
+  display:flex;
+  justify-content:center;
+  gap:14px;
+  margin-bottom:18px;
+  flex-wrap:wrap;
+}
+
+.interests .item {
+  font-size:12px;
+  color:var(--subtext);
+}
+
+.text {
+  font-size:15px;
+  margin-bottom:22px;
+  color:var(--subtext);
+}
+
+.social-links a {
+  display:block;
+  padding:12px;
+  margin-bottom:14px;
+  border-radius:12px;
+  background:var(--bg);
+  text-decoration:none;
+  color:var(--text);
 }
 
 .contact a {
-  display: inline-flex;
+  padding:10px 14px;
+  border-radius:20px;
+  background:var(--bg);
+  text-decoration:none;
+  color:var(--text);
+}
+
+footer {
+  margin-top:18px;
+  font-size:12px;
+  opacity:.6;
+}
+
+/* POPUP */
+.spotify-popup {
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+}
+
+.spotify-popup.active {
+  display:flex;
+}
+
+.spotify-box {
+  background:var(--card);
+  width:90%;
+  max-width:360px;
+  border-radius:18px;
+  padding:20px;
+  position:relative;
+  animation:pop .25s ease;
+}
+
+.close-spotify {
+  position:absolute;
+  top:10px;
+  right:14px;
+  font-size:18px;
+  cursor:pointer;
+}
+
+/* ALBUM */
+.album-wrapper {
+  display:flex;
+  justify-content:center;
+  margin-bottom:14px;
+}
+
+.album-cover {
+  width:140px;
+  height:140px;
+  border-radius:50%;
+  object-fit:cover;
+  box-shadow:0 8px 24px rgba(0,0,0,.25);
+  animation:spin 6s linear infinite;
+  animation-play-state:paused;
+}
+
+.album-cover.playing {
+  animation-play-state:running;
+}
+
+.song-title {
+  font-size:14px;
+  margin-bottom:10px;
+}
+
+audio {
+  width:100%;
+  border-radius:12px;
+}
+
+@keyframes spin {
+  from {transform:rotate(0deg);}
+  to {transform:rotate(360deg);}
+}
+
+@keyframes pop {
+  from {transform:scale(.9);opacity:0;}
+  to {transform:scale(1);opacity:1;}
+}
+
+.mini-player {
+  position: absolute;
+  top: -58px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--card);
+  width: 90%;
+  max-width: 320px;
+  border-radius: 18px;
+  padding: 10px 12px;
+  display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 10px 16px;
-  border-radius: 20px;
-  background: var(--bg);
-  color: var(--text);
-  text-decoration: none;
-  font-size: 14px;
-  transition: 0.2s;
+  gap: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
 }
 
-.contact a:hover {
-  background: var(--accent);
+.mini-cover {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  animation: spin 6s linear infinite;
+  animation-play-state: paused;
 }
 
-    footer {
-      margin-top: 18px;
-      font-size: 12px;
-      opacity: .6;
-    }
+.mini-cover.playing {
+  animation-play-state: running;
+}
 
-    /* RESPONSIVE EXTRA (HP kecil) */
-    @media (max-width: 360px) {
-      .profile-img {
-        width: 105px;
-        height: 105px;
-      }
-      .text {
-        font-size: 14px;
-      }
-    }
-  </style>
+.mini-title {
+  font-size: 12px;
+  flex: 1;
+  text-align: left;
+}
+
+.mini-player button {
+  border: none;
+  background: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+
+
+</style>
 </head>
 
 <body>
-  <div class="container">
-    <div class="toggle" onclick="toggleMode()">🌙 / ☀️</div>
 
-<img 
-  src="https://scontent.fcgk43-1.fna.fbcdn.net/v/t39.30808-6/594128360_2371892956595614_5146118254492505502_n.jpg?_nc_cat=107&_nc_cb=99be929b-ad57045b&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeF-DUjfu-8MrOF7aLBHGifadEsCjcL_Ptp0SwKNwv8-2lbMCmXMZrDbRsGa72bsn9Pelz0Z1I_jUFPLBoyyFL9V&_nc_ohc=DKprG2lIaNYQ7kNvwGxCVk8&_nc_oc=Adli_6Jkqukixc0eyt2hylOwTbiUuIo_jno5ATeBjF8ntPYURpTkIqD9vcWb4MTGID-HSLY69RT7bEe-XR5_ctYg&_nc_zt=23&_nc_ht=scontent.fcgk43-1.fna&_nc_gid=82gtB8z-ftiyi4WxSuK6lQ&oh=00_Afl1yrWXy3eFGZtWafeS5aIKvv33pVP771WEw13NvOYgeg&oe=694FAF68"
-  class="profile-img"
-  alt="Foto Profil">
+<div class="container">
+  <div class="toggle" onclick="toggleMode()">🌙 / ☀️</div>
 
-    <div class="interests">
-      <div class="item">⚽🤍 Real Madrid</div>
-      <div class="item">💻 Ngoding</div>
-      <div class="item">📱 Oprek Hape</div>
-    </div>
-
-    <p class="text">Cari apa bre?</p>
-
-    <div class="social-links">
-      <a href="https://instagram.com/rizqitovianp">Instagram</a>
-      <a href="https://x.com/rizqioraurus">X / Twitter</a>
-      <a href="https://facebook.com/rizqitovianp">Facebook</a>
-    </div>
-
-    <div class="contact">
-  <a href="mailto:rizqitovian@protonmail.com">
-    ✉️ Contact Me
-  </a>
-</div>
-
-    <footer>© 2026 Rizqi Tovian</footer>
+  <div class="spotify-btn" onclick="openPlayer()">
+    <svg viewBox="0 0 168 168">
+      <path d="M84 0a84 84 0 1 0 0 168 84 84 0 0 0 0-168z"/>
+    </svg>
   </div>
 
-  <script>
-    function toggleMode() {
-      document.body.classList.toggle('dark');
-    }
-  </script>
+  <img src="https://scontent.fcgk43-1.fna.fbcdn.net/v/t39.30808-6/594128360_2371892956595614_5146118254492505502_n.jpg" class="profile-img">
+
+  <div class="interests">
+    <div class="item">⚽ Real Madrid</div>
+    <div class="item">💻 Ngoding</div>
+    <div class="item">📱 Oprek Hape</div>
+  </div>
+
+  <p class="text">Cari apa bre?</p>
+
+  <div class="social-links">
+    <a href="#">Instagram</a>
+    <a href="#">X / Twitter</a>
+    <a href="#">Facebook</a>
+  </div>
+
+  <div class="contact">
+    <a href="mailto:rizqitovian@protonmail.com">✉️ Contact Me</a>
+  </div>
+
+  <footer>© 2026 Rizqi Tovian</footer>
+</div>
+
+<!-- POPUP PLAYER -->
+<div class="spotify-popup" id="playerPopup" onclick="closePlayer(event)">
+  <div class="spotify-box">
+    <div class="close-spotify" onclick="closePlayer()">✖</div>
+
+    <div class="album-wrapper">
+      <img src="nikijpeg"
+           class="album-cover" id="albumCover">
+    </div>
+
+    <p class="song-title">🎧 NIKI – Backburner</p>
+
+    <audio id="audioPlayer" controls>
+      <source src="NIKI-Backburner.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+</div>
+
+<script>
+const audio = document.getElementById("audioPlayer");
+const cover = document.getElementById("albumCover");
+
+audio.addEventListener("play",()=>cover.classList.add("playing"));
+audio.addEventListener("pause",()=>cover.classList.remove("playing"));
+audio.addEventListener("ended",()=>cover.classList.remove("playing"));
+
+function openPlayer(){
+  document.getElementById("playerPopup").classList.add("active");
+}
+
+function closePlayer(e){
+  if(!e || e.target.id==="playerPopup"){
+    document.getElementById("playerPopup").classList.remove("active");
+    audio.pause();
+  }
+}
+
+function toggleMode(){
+  document.body.classList.toggle("dark");
+}
+</script>
+
 </body>
 </html>
