@@ -96,22 +96,23 @@
     }
 
     /* interests */
-    .interests {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-bottom: 18px;
-    }
+    ..interests {
+  display: flex;
+  flex-direction: row;        /* HORIZONTAL */
+  justify-content: center;    /* tengah */
+  gap: 14px;                  /* jarak antar teks */
+  margin-bottom: 18px;
+  flex-wrap: wrap;            /* aman di layar kecil */
+}
 
-    .interests .item {
-      background: var(--bg);
-      padding: 10px 14px;
-      border-radius: 14px;
-      font-size: 14px;
-      color: var(--subtext);
-      display: flex;
-      justify-content: center;
-      gap: 8px;
+.interests .item {
+  background: none;           /* hilangkan box */
+  padding: 0;
+  border-radius: 0;
+  font-size: 14px;
+  color: var(--subtext);
+  white-space: nowrap;        /* teks tidak turun */
+}
     }
 
     .text {
