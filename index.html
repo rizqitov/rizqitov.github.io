@@ -40,8 +40,8 @@ body {
   color:var(--text);
   padding:16px;
   overflow-x:hidden;
+  transition: background .35s ease, color .35s ease;
 }
-
 
 .container {
   width:100%;
@@ -53,17 +53,22 @@ body {
   box-shadow:0 10px 30px rgba(0,0,0,.15);
   position:relative;
   z-index:1;
+  transition: background .35s ease, color .35s ease, backdrop-filter .35s ease;
 }
 
 .toggle {
   position:absolute;
-  top:14px;
   right:14px;
   font-size:13px;
   background:var(--bg);
   padding:6px 10px;
   border-radius:20px;
   cursor:pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.toggle:active {
+  transform: scale(0.9) rotate(-8deg);
 }
 
 .spotify-btn {
@@ -93,8 +98,8 @@ body {
   object-fit:cover;
   border:3px solid var(--accent);
   margin:14px auto 18px;
+  transition:.3s;
 }
-
 
 .text::after {
   content: "";
@@ -105,7 +110,6 @@ body {
   margin: 16px auto 0;
   opacity: 0.4;
 }
-
 
 .interests {
   display:flex;
@@ -144,9 +148,9 @@ body {
   color:var(--text);
 }
 
-  .contact {
+.contact {
   margin-top: 20px;
-  }
+}
 
 footer {
   margin-top:18px;
@@ -154,7 +158,9 @@ footer {
   opacity:.6;
 }
 
-/* POPUP */
+/* ==========================
+   POPUP PLAYER
+========================== */
 .spotify-popup {
   position:fixed;
   inset:0;
@@ -187,7 +193,9 @@ footer {
   cursor:pointer;
 }
 
-/* ALBUM */
+/* ==========================
+   ALBUM
+========================== */
 .album-wrapper {
   display:flex;
   justify-content:center;
@@ -227,84 +235,77 @@ audio {
   from {transform:scale(.9);opacity:0;}
   to {transform:scale(1);opacity:1;}
 }
-
-.mini-player {
-  position: absolute;
-  top: -58px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--card);
-  width: 90%;
-  max-width: 320px;
-  border-radius: 18px;
-  padding: 10px 12px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+.apple-icon {
+  width:16px;
+  height:16px;
+  fill:var(--text);
 }
 
-.mini-cover {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  object-fit: cover;
-  animation: spin 6s linear infinite;
-  animation-play-state: paused;
+.ios-toggle {
+  display:flex;
+  align-items:center;
+  gap:6px;
 }
 
-.mini-cover.playing {
-  animation-play-state: running;
+
+/* ==========================
+   🍎 iOS GLASS THEME
+========================== */
+
+body.ios-glass {
+  background:linear-gradient(135deg, rgba(240,240,255,.8), rgba(200,200,255,.35));
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
 }
 
-.mini-title {
-  font-size: 12px;
-  flex: 1;
-  text-align: left;
+body.ios-glass .container {
+  background:rgba(255,255,255,.25);
+  border:1px solid rgba(255,255,255,.45);
+  box-shadow:0 25px 60px rgba(0,0,0,.18);
 }
 
-.mini-player button {
-  border: none;
-  background: none;
-  font-size: 18px;
-  cursor: pointer;
+body.dark.ios-glass {
+  background: radial-gradient(circle at top, rgba(40,40,60,.9), rgba(10,10,20,.95));
 }
 
-/* toggle animation */
-.toggle {
-  transition: background 0.3s ease, transform 0.3s ease;
+body.dark.ios-glass .container {
+  background:rgba(20,20,30,.45);
+  border:1px solid rgba(255,255,255,.1);
 }
 
-.toggle:active {
-  transform: scale(0.9) rotate(-8deg);
+/* floating photo */
+body.ios-glass .profile-img {
+  box-shadow:0 25px 45px rgba(0,0,0,.25);
 }
 
-@keyframes fadeBG{
-  from{ opacity:.6; }
-  to{ opacity:1; }
+body.ios-glass .profile-img:hover {
+  transform:translateY(-6px);
 }
-
-body, .container {
-  transition: background .35s ease, color .35s ease;
-}
-
- 
 </style>
 </head>
 
 <body>
 
 <div class="container">
-  <div class="toggle" onclick="toggleMode()">🌙 / ☀️</div>
+
+  <!-- DARK MODE TOGGLE -->
+  <div class="toggle" style="top:14px;" onclick="toggleMode()">🌙 / ☀️</div>
+
+  <!-- IOS THEME TOGGLE -->
+  <div class="toggle ios-toggle" style="top:48px;" onclick="toggleIOS()">
+  <svg viewBox="0 0 256 315" class="apple-icon">
+    <path d="M213.8 167.1c-.4-36.4 29.7-53.9 31-54.7-17-24.9-43.5-28.3-52.8-28.8-22.5-2.3-43.9 13.3-55.3 13.3s-28.9-13-47.6-12.7c-24.5.4-47 14.2-59.6 36.1-25.4 44.1-6.5 109.4 18.2 145.2 12.1 17.4 26.5 36.9 45.4 36.2 18.2-.7 25.1-11.7 47-11.7s28.1 11.7 47.6 11.4c19.7-.3 32.2-17.7 44.2-35.1 13.9-20.3 19.6-39.9 19.9-40.9-.4-.2-38.1-14.6-38.4-58.3zM173.5 54.9c10.4-12.6 17.4-30.2 15.5-47.9-15 0-33.3 9.9-44.1 22.4-9.6 11-18 28.6-15.8 45.7 16.7 1.3 33.9-8.5 44.4-20.2z"/>
+  </svg>
+</div>
+
 
   <div class="spotify-btn" onclick="openPlayer()">
-  <svg viewBox="0 0 24 24">
-    <path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/>
-  </svg>
-    
-</div>
-  
-  <img src="me.jpg"class="profile-img">
+    <svg viewBox="0 0 24 24">
+      <path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/>
+    </svg>
+  </div>
+
+  <img src="me.jpg" class="profile-img">
 
   <div class="interests">
     <div class="item">⚽ Real Madrid</div>
@@ -314,14 +315,14 @@ body, .container {
 
   <p class="text">ya gitu lah manusia serakah nggk ada puas nya wkwkwk</p>
 
-<div class="social-links">
-  <a href="https://instagram.com/rizqitovianp">
-    <i class="fab fa-instagram"></i> Instagram
-  </a>
-  <a href="https://facebook.com/rizqitovianp">
-    <i class="fab fa-facebook"></i> Facebook
-  </a>
-</div>
+  <div class="social-links">
+    <a href="https://instagram.com/rizqitovianp">
+      <i class="fab fa-instagram"></i> Instagram
+    </a>
+    <a href="https://facebook.com/rizqitovianp">
+      <i class="fab fa-facebook"></i> Facebook
+    </a>
+  </div>
 
   <div class="contact">
     <a href="mailto:rizqitovian@protonmail.com">✉️ Contact Me</a>
@@ -336,8 +337,7 @@ body, .container {
     <div class="close-spotify" onclick="closePlayer()">✖</div>
 
     <div class="album-wrapper">
-      <img src="nikijpeg"
-           class="album-cover" id="albumCover">
+      <img src="nikijpeg" class="album-cover" id="albumCover">
     </div>
 
     <p class="song-title">🎧 NIKI – Backburner</p>
@@ -367,28 +367,42 @@ function closePlayer(e){
   }
 }
 
-/* ==========================
-   🔆 TOGGLE + SAVE THEME
-========================== */
+/* 🌙 DARK MODE */
 function toggleMode() {
   document.body.classList.toggle("dark");
 
   if (document.body.classList.contains("dark")) {
-    localStorage.setItem("theme", "dark");
+    localStorage.setItem("theme","dark");
   } else {
-    localStorage.setItem("theme", "light");
+    localStorage.setItem("theme","light");
   }
 }
 
-/* ==========================
-   ♻️ LOAD THEME SAAT RELOAD
-========================== */
-document.addEventListener("DOMContentLoaded", () => {
+/* 🍎 iOS GLASS MODE */
+function toggleIOS() {
+  document.body.classList.toggle("ios-glass");
+
+  if (document.body.classList.contains("ios-glass")) {
+    localStorage.setItem("ios-theme","on");
+  } else {
+    localStorage.setItem("ios-theme","off");
+  }
+}
+
+/* ♻️ LOAD SAAT RELOAD */
+document.addEventListener("DOMContentLoaded",()=>{
+
   const savedTheme = localStorage.getItem("theme");
+  const savedIOS = localStorage.getItem("ios-theme");
 
   if (savedTheme === "dark") {
     document.body.classList.add("dark");
   }
+
+  if (savedIOS === "on") {
+    document.body.classList.add("ios-glass");
+  }
+
 });
 </script>
 </body>
