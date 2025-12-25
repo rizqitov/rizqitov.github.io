@@ -372,7 +372,6 @@ function toggleMode() {
     localStorage.setItem("theme", "light");
   }
 
- <script>
 // cek tema saat halaman dibuka
 document.addEventListener("DOMContentLoaded", () => {
   const savedTheme = localStorage.getItem("theme");
@@ -381,15 +380,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.classList.add("dark");
   }
 });
-</script>
-
-
-  // trigger fade animation
-  document.body.classList.remove("fade-change");
-  void document.body.offsetWidth; // restart animation hack
-  document.body.classList.add("fade-change");
-}
-
 </script>
 
 </body>
