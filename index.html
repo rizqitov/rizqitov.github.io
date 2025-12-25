@@ -269,23 +269,6 @@ audio {
   font-size: 18px;
   cursor: pointer;
 }
-/* Smooth transition theme */
-body,
-.container,
-.spotify-box,
-.mini-player {
-  transition: 
-    background 0.35s ease,
-    color 0.35s ease,
-    box-shadow 0.35s ease;
-}
-
-/* smooth border & accent items */
-.profile-img,
-.album-cover,
-.mini-cover {
-  transition: border 0.35s ease, box-shadow 0.35s ease;
-}
 
 /* toggle animation */
 .toggle {
@@ -296,42 +279,10 @@ body,
   transform: scale(0.9) rotate(-8deg);
 }
 
-/* subtle fade flash */
-body.fade-change {
-  animation: fadeBG .35s ease;
-}
-
 @keyframes fadeBG{
   from{ opacity:.6; }
   to{ opacity:1; }
 }
-
-.ripple {
-  position: absolute;
-  border-radius: 50%;
-  transform: scale(0);
-  animation: ripple .6s linear;
-  background: rgba(255,255,255,.35);
-  pointer-events: none;
-}
-
-@keyframes ripple {
-  to {
-    transform: scale(4);
-    opacity: 0;
- }
-
- @keyframes wiggle {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-2px); }
-  100% { transform: translateY(0); }
-}
-
-/* hanya iconnya yang gerak */
-.social-links a:hover i {
-  animation: wiggle .35s ease;
-}
-
  
 </style>
 </head>
