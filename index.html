@@ -305,10 +305,34 @@ body.fade-change {
   from{ opacity:.6; }
   to{ opacity:1; }
 }
+
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  animation: ripple .6s linear;
+  background: rgba(255,255,255,.35);
+  pointer-events: none;
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+ }
+
+ @keyframes wiggle {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+  100% { transform: translateY(0); }
+}
+
+/* hanya iconnya yang gerak */
+.social-links a:hover i {
+  animation: wiggle .35s ease;
+}
+
  
-
-
-
 </style>
 </head>
 
@@ -395,6 +419,23 @@ function toggleMode(){
   void document.body.offsetWidth; // restart animation hack
   document.body.classList.add("fade-change");
 }
+
+document.querySelectorAll(".social-links a, .contact a").forEach(btn=>{
+  btn.addEventListener("click", function(e){
+    const circle = document.createElement("span");
+    const size = Math.max(btn.clientWidth, btn.clientHeight);
+    const rect = btn.getBoundingClientRect();
+
+    circle.style.width = circle.style.height = size + "px";
+    circle.style.left = e.clientX - rect.left - size/2 + "px";
+    circle.style.top = e.clientY - rect.top - size/2 + "px";
+    circle.classList.add("ripple");
+
+    btn.appendChild(circle);
+
+    setTimeout(()=>circle.remove(), 600);
+  });
+});
 </script>
 
 </body>
